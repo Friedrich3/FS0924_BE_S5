@@ -1,0 +1,42 @@
+﻿@using FS0924_BE_S5.Models.ViewModels;
+@model ListaLibriViewModel;
+
+
+@{
+    ViewData["Title"] = "Libri";
+}
+
+<div class="container">
+	<div class="row">
+		<h2>I Nostri Libri:</h2>
+	</div>
+	<div class="row">
+
+		@if (Model.Libri != null && Model.Libri.Any())
+		{
+			@foreach (var item in Model.Libri){
+				<div class="card" style="width: 18rem;">
+					<img src="@item.Copertina" class="card-img-top" alt="Immagine copertina">
+					<div class="card-body">
+						<h5 class="card-title">@item.Titolo</h5>
+						<p class="card-text">@item.Autore</p>
+						<p class="card-text">Genere: @item.Genere</p>
+						<p class="card-text">Disponibilita' : @(item.Disponibilita ? "Si" : "No")</p>
+					</div>
+				</div>
+			}
+		}
+		else
+		{
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				<strong>Error 404</strong><br /> Siamo spiacenti non ci sono libri nella nostra sezione!
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		}
+
+	</div>
+
+</div>
+
+
+

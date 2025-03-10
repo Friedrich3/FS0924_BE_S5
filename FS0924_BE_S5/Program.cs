@@ -1,7 +1,20 @@
+using FS0924_BE_S5.Data;
+using FS0924_BE_S5.Services;
+using Microsoft.EntityFrameworkCore;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//QUI E' DOVE ANDRANNOI VARI SERVIZI TRA CUI QUELLO PER CONNETTERE DBCONTEXT CON TUTTA L'APP
+builder.Services.AddDbContext<PraticaBES5>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+    );
+
+//DOPO LA DICHIARAZIONE DEL DBCONTEXT SI AGGIUNGONO TUTTI I SERVIZI NECESSARI
+builder.Services.AddScoped<LibroServices>();
 
 var app = builder.Build();
 
