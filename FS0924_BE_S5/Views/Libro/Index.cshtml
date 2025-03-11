@@ -1,5 +1,4 @@
-﻿@using FS0924_BE_S5.Models.ViewModels;
-@model ListaLibriViewModel;
+﻿@model ListaLibriViewModel;
 
 
 @{
@@ -11,18 +10,24 @@
 		<h2>I Nostri Libri:</h2>
 	</div>
 	<div class="row">
+		<a asp-controller="Libro" asp-action="Add" class="btn btn-success col-2 ms-auto">Aggiungi un libro +</a>
+	</div>
+	<div class="row mt-2">
 
 		@if (Model.Libri != null && Model.Libri.Any())
 		{
 			@foreach (var item in Model.Libri){
-				<div class="card" style="width: 18rem;">
+				<div class="col-4 col-md-2">
+				<div class="card p-0">
 					<img src="@item.Copertina" class="card-img-top" alt="Immagine copertina">
 					<div class="card-body">
 						<h5 class="card-title">@item.Titolo</h5>
 						<p class="card-text">@item.Autore</p>
 						<p class="card-text">Genere: @item.Genere</p>
 						<p class="card-text">Disponibilita' : @(item.Disponibilita ? "Si" : "No")</p>
+						<a asp-controller="Libro" asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id">Edit</a>
 					</div>
+				</div>
 				</div>
 			}
 		}

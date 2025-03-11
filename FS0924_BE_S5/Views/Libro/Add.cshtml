@@ -1,0 +1,43 @@
+﻿@model LibroAddViewModel
+@{
+    ViewData["Title"] = "Aggiungi";
+}
+
+<div class="container">
+	<div class="row">
+		<h2>Aggiungi un libro</h2>
+	</div>
+	<div>
+		<form asp-controller="Libro" asp-action="Add" method="post">
+			<div class="mb-3">
+				<label for="Titolo" class="form-label">Titolo* :</label>
+				<input type="text" class="form-control" asp-for="Titolo" id="Titolo" placeholder="Aggiungi un titolo...">
+			</div>
+			<div class="mb-3">
+				<label for="Autore" class="form-label">Autore* :</label>
+				<input type="text" class="form-control" asp-for="Autore" id="Autore" placeholder="Aggiungi l'autore...">
+			</div>
+			<div class="mb-3">
+				<label for="Genere" class="form-label">Genere* :</label>
+				<input type="text" class="form-control" asp-for="Genere" id="Genere" placeholder="Aggiungi il genere...">
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" asp-for="Disponibilita" id="defaultCheck1" checked>
+				<label class="form-check-label" for="defaultCheck1">
+					E' disponibile in stock?
+				</label>
+			</div>
+			<div class="mb-3">
+				<label for="url" class="form-label">Url Immagine:</label>
+				<input type="text" class="form-control" asp-for="Copertina" id="url" placeholder="Aggiungi una Url per la copertina...">
+			</div>
+
+			<small class="text-secondary mb-3">* Indica un campo obbligatorio</small>
+
+			<div class="text-end">
+				<button type="submit" class="btn btn-success">Aggiungi</button>
+				<button type="reset" class="btn btn-secondary">Reset</button>
+			</div>
+		</form>
+	</div>
+</div>
