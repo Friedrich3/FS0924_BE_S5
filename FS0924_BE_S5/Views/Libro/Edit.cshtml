@@ -11,15 +11,15 @@
 		<form asp-controller="Libro" asp-action="Edit" method="post">
 			<div class="mb-3">
 				<label for="Titolo" class="form-label">Titolo* :</label>
-				<input type="text" class="form-control" asp-for="Titolo" id="Titolo" placeholder="Aggiungi un titolo...">
+				<input type="text" class="form-control" asp-for="Titolo" id="Titolo" placeholder="Aggiungi un titolo..." required>
 			</div>
 			<div class="mb-3">
 				<label for="Autore" class="form-label">Autore* :</label>
-				<input type="text" class="form-control" asp-for="Autore" id="Autore" placeholder="Aggiungi l'autore...">
+				<input type="text" class="form-control" asp-for="Autore" id="Autore" placeholder="Aggiungi l'autore..." required>
 			</div>
 			<div class="mb-3">
 				<label for="Genere" class="form-label">Genere* :</label>
-				<input type="text" class="form-control" asp-for="Genere" id="Genere" placeholder="Aggiungi il genere...">
+				<input type="text" class="form-control" asp-for="Genere" id="Genere" placeholder="Aggiungi il genere..." required>
 			</div>
 			<div class="form-check">
 				<input class="form-check-input" type="checkbox" asp-for="Disponibilita" id="defaultCheck1" checked>
@@ -37,7 +37,7 @@
 			<div class="d-flex justify-content-between">
 				<button type="submit" class="btn btn-success">Aggiungi</button>
 				<button type="reset" class="btn btn-secondary">Reset</button>
-				<a class="btn btn-danger" asp-controller="Libro" asp-action="Delete" asp-route-id="@Model.Id">Elimina</a>
+				<a class="btn btn-danger" asp-controller="Libro" asp-action="Delete" asp-route-id="@Model.Id" onclick="return confirm('Sei sicuro di voler eliminare questo prodotto?');">Elimina</a>
 			</div>
 		</form>
 	</div>
