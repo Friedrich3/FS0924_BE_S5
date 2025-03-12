@@ -4,6 +4,7 @@ using FS0924_BE_S5.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FS0924_BE_S5.Migrations
 {
     [DbContext(typeof(PraticaBES5))]
-    partial class PraticaBES5ModelSnapshot : ModelSnapshot
+    [Migration("20250312143736_UpdateTablesAndRelation2")]
+    partial class UpdateTablesAndRelation2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,7 +60,9 @@ namespace FS0924_BE_S5.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int>("IdGenere")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("1");
 
                     b.Property<string>("Titolo")
                         .IsRequired()

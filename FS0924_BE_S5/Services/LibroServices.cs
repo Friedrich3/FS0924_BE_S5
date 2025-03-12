@@ -33,6 +33,27 @@ namespace FS0924_BE_S5.Services
             }
         }
 
+        public async Task<List<Genere>> GetGeneri()
+        {
+            try
+            {
+                var Lista = await _context.Generi.ToListAsync();
+                if (Lista.Count > 0)
+                {
+                    return Lista;
+                }
+                else
+                {
+                    return new List<Genere>();
+                }
+            }
+            catch
+            {
+
+                return new List<Genere>();
+            }
+        }
+
 
         public async Task<ListaLibriViewModel> GetBooks() 
         {
@@ -41,7 +62,7 @@ namespace FS0924_BE_S5.Services
             try 
             {
                 var ListaLibri = new ListaLibriViewModel();
-                ListaLibri.Libri = await _context.Libri.ToListAsync();
+                ListaLibri.Libri = await _context.Libri.Include(i => i.Genere).ToListAsync();
                 return ListaLibri;
             }
             //Nel Caso non trovi nulla nella tabella di riferimento torna una lista vuota
@@ -59,7 +80,7 @@ namespace FS0924_BE_S5.Services
                 Id = Guid.NewGuid(),
                 Titolo = addmodel.Titolo,
                 Autore = addmodel.Autore,
-                Genere = addmodel.Genere,
+                IdGenere = addmodel.IdGenere,
                 Disponibilita = addmodel.Disponibilita,
                 Copertina = addmodel.Copertina
             };
@@ -91,7 +112,7 @@ namespace FS0924_BE_S5.Services
             }
             libro.Titolo = editViewModel.Titolo;
             libro.Autore = editViewModel.Autore;
-            libro.Genere = editViewModel.Genere;
+            libro.IdGenere = editViewModel.IdGenere;
             libro.Disponibilita = editViewModel.Disponibilita;
             libro.Copertina = editViewModel.Copertina;
 

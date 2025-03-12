@@ -13,5 +13,15 @@ namespace FS0924_BE_S5.Data
         //DOPO IL COSTRUTTORE VERRANNO INSERITI I VARI DBSET per le tabelle del DATABASE
         //OGNI DbSet Necessita del proprio modello e di un nome
         public DbSet<Libro> Libri { get; set; }
+
+
+        //DAY 3
+        public DbSet<Genere> Generi { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Libro>().HasOne(g => g.Genere).WithMany(l => l.LibriGenere);
+            //modelBuilder.Entity<Libro>().Property(p => p.IdGenere).HasDefaultValueSql("1");
+        }
     }
 }

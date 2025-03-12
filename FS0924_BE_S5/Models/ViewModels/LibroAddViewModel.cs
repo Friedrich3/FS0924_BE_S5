@@ -11,8 +11,7 @@ namespace FS0924_BE_S5.Models.ViewModels
         [StringLength(50)]
         public string? Autore { get; set; }
         [Required]
-        [StringLength(50)]
-        public string? Genere { get; set; }
+        public int IdGenere { get; set; }
         public bool Disponibilita { get; set; }
         public string? Copertina { get; set; }
     }

@@ -16,12 +16,23 @@ namespace FS0924_BE_S5.Controllers
         public async Task<IActionResult> Index()
         {
             var Lista = await _libroServices.GetBooks();
+            var Generi = await _libroServices.GetGeneri();
+            if (Generi.Count > 0)
+            {
+                ViewBag.Generi = Generi;
+            }
 
             return View(Lista);
         }
 
-        public IActionResult Add()
+        public async Task<IActionResult> Add()
         {
+            //RECUPERA TUTTA LA LISTA
+            var Generi = await _libroServices.GetGeneri();
+            if (Generi.Count > 0)
+            {
+                ViewBag.Generi = Generi;
+            }
             return View();
         }
 
@@ -57,10 +68,16 @@ namespace FS0924_BE_S5.Controllers
                 Id = libro.Id,
                 Titolo = libro.Titolo,
                 Autore = libro.Autore,
-                Genere = libro.Genere,
+                IdGenere = libro.IdGenere,
                 Disponibilita = libro.Disponibilita,
                 Copertina = libro.Copertina
             };
+            //RECUPERA TUTTA LA LISTA
+            var Generi = await _libroServices.GetGeneri();
+            if (Generi.Count > 0)
+            {
+                ViewBag.Generi = Generi;
+            }
             return View(editModel);
         }
         [HttpPost]
