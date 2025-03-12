@@ -24,5 +24,8 @@ namespace FS0924_BE_S5.Models
 
         [ForeignKey("IdGenere")]
         public Genere? Genere { get; set; }
+
+        [ForeignKey("Id")]
+        public List<Ordine>? Orders { get; set; }
     }
 }
