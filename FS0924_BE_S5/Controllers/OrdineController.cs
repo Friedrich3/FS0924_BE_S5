@@ -35,5 +35,13 @@ namespace FS0924_BE_S5.Controllers
             var Lista = await _ordineServices.GetInCorso();
             return View(Lista);
         }
+
+        public async Task<IActionResult> ConsegnaLibro()
+        {
+
+
+
+            return RedirectToAction("InCorso");
+        }
     }
 }

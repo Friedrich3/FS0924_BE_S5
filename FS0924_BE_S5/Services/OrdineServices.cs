@@ -9,9 +9,11 @@ namespace FS0924_BE_S5.Services
     public class OrdineServices
     {
         private readonly PraticaBES5 _context;
-        public OrdineServices(PraticaBES5 context)
+        private readonly EmailServices _emailService;
+        public OrdineServices(PraticaBES5 context,EmailServices emailServices)
         {
             _context = context;
+            _emailService = emailServices;
         }
 
         private async Task<bool> SaveChange()
@@ -56,15 +58,15 @@ namespace FS0924_BE_S5.Services
 
             };
             _context.Ordini.Add(ordine);
+            libro!.Disponibilita = false;
 
-             libro!.Disponibilita = false;
-            
+            //PRIMA DEL SAVE FACCIAMO l'INVIO DELLA MAIL
+            _emailService.SendOrder(user.Email, libro.Titolo);
             return await SaveChange();
 
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
