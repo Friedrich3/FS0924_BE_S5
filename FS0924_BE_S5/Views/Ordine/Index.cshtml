@@ -1,0 +1,33 @@
+﻿@model ListaLibriViewModel;
+
+
+@{
+    ViewData["Title"] = "Ordini Disponibili";
+}
+
+
+<div class="container">
+      <div class="row">
+          <table class="table-striped">
+              <tr>
+                  <th></th>
+                  <th>Titolo</th>
+                  <th>Autore</th>
+                  <th>Genere</th>
+                  <th>Actions</th>
+              </tr>
+              @if(Model.Libri != null){
+
+                foreach(var item in Model.Libri){
+                    <tr>
+                        <td><img src="@item.Copertina" style="width:50px;"/></td>
+                        <td>@item.Titolo</td>
+                        <td>@item.Autore</td>
+                        <td>@item.Genere?.Name</td>
+                        <td><a class="btn btn-primary" asp-controller="Ordine" asp-action="NewOrder" asp-route-id="@item.Id">Ordina</a></td>
+                    </tr>
+                }
+              }
+          </table>
+      </div>
+</div>

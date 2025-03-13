@@ -25,6 +25,19 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Libro" asp-action="Index">Libri</a>
                         </li>
+                        <li>
+                            <div class="dropdown">
+                                <span class="btn btn-secondary dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Ordini
+                                </span>
+
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-controller="Ordine" asp-action="Index">Disponibili</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Ordine" asp-action="InCorso">In Corso</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Ordine" asp-action="Scaduti">Scaduti</a></li>
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>

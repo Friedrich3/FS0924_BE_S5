@@ -23,9 +23,9 @@ namespace FS0924_BE_S5.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Libro>().HasOne(g => g.Genere).WithMany(l => l.LibriGenere);
-
-            modelBuilder.Entity<Libro>().HasMany(o => o.Orders).WithOne(l => l.Book);
-            modelBuilder.Entity<Utente>().HasMany(o => o.Orders).WithOne(u => u.User);
+            //PER LE RELAZIONI MOLTI AD UNO VANNO SPECIFICATE LE FOREIGNKEY ANCHE NELLA FLUENT API
+            modelBuilder.Entity<Libro>().HasMany(o => o.Orders).WithOne(l => l.Book).HasForeignKey(o=> o.LibroId);
+            modelBuilder.Entity<Utente>().HasMany(o => o.Orders).WithOne(u => u.User).HasForeignKey(o => o.UtenteId);
             
         }
     }

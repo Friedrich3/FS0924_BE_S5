@@ -21,5 +21,13 @@ namespace FS0924_BE_S5.Models
 
         [ForeignKey("UtenteId")]
         public Utente? User { get; set; }
+
+        //Day4
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime DataInizio { get; set; } = DateTime.Now;
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime DataScadenza { get; set; } = DateTime.Now.AddDays(10);
     }
 }

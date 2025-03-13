@@ -15,6 +15,7 @@ builder.Services.AddDbContext<PraticaBES5>(options =>
 
 //DOPO LA DICHIARAZIONE DEL DBCONTEXT SI AGGIUNGONO TUTTI I SERVIZI NECESSARI
 builder.Services.AddScoped<LibroServices>();
+builder.Services.AddScoped<OrdineServices>();
 
 var app = builder.Build();
 

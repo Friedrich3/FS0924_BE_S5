@@ -4,6 +4,7 @@ using FS0924_BE_S5.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FS0924_BE_S5.Migrations
 {
     [DbContext(typeof(PraticaBES5))]
-    partial class PraticaBES5ModelSnapshot : ModelSnapshot
+    [Migration("20250313125442_ChangeForeignKeys")]
+    partial class ChangeForeignKeys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

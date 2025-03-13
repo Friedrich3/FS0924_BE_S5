@@ -20,7 +20,6 @@ namespace FS0924_BE_S5.Models
         [EmailAddress]
         public required string Email { get; set; }
 
-        [ForeignKey("IdUtente")]
         public List<Ordine>? Orders { get; set; }
         
     }
