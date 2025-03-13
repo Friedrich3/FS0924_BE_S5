@@ -6,11 +6,24 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FS0924_BE_S5.Migrations
 {
     /// <inheritdoc />
-    public partial class ManyToManyProva1 : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Generi",
+                columns: table => new
+                {
+                    IdGenere = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Generi", x => x.IdGenere);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Utenti",
                 columns: table => new
@@ -26,6 +39,28 @@ namespace FS0924_BE_S5.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Libri",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Titolo = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Autore = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    IdGenere = table.Column<int>(type: "int", nullable: false),
+                    Disponibilita = table.Column<bool>(type: "bit", nullable: false),
+                    Copertina = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Libri", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Libri_Generi_IdGenere",
+                        column: x => x.IdGenere,
+                        principalTable: "Generi",
+                        principalColumn: "IdGenere",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Ordini",
                 columns: table => new
                 {
@@ -34,7 +69,8 @@ namespace FS0924_BE_S5.Migrations
                     LibroId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UtenteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Stato = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUtente = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DataInizio = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataScadenza = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,6 +90,11 @@ namespace FS0924_BE_S5.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Libri_IdGenere",
+                table: "Libri",
+                column: "IdGenere");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Ordini_LibroId",
                 table: "Ordini",
                 column: "LibroId");
@@ -71,7 +112,13 @@ namespace FS0924_BE_S5.Migrations
                 name: "Ordini");
 
             migrationBuilder.DropTable(
+                name: "Libri");
+
+            migrationBuilder.DropTable(
                 name: "Utenti");
+
+            migrationBuilder.DropTable(
+                name: "Generi");
         }
     }
 }

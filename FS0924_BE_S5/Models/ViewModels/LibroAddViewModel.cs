@@ -13,6 +13,6 @@ namespace FS0924_BE_S5.Models.ViewModels
         [Required]
         public int IdGenere { get; set; }
         public bool Disponibilita { get; set; }
-        public string? Copertina { get; set; }
+        public IFormFile? Copertina { get; set; }
     }
 }

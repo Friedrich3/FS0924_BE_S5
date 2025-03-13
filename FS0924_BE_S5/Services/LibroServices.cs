@@ -75,14 +75,23 @@ namespace FS0924_BE_S5.Services
 
         public async Task<bool> AddBookAsync(LibroAddViewModel addmodel) 
         {
-            var book = new Libro()
+            var fileName = addmodel.Copertina.FileName;
+            var path = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot","uploads", fileName);
+            await using (var stream = new FileStream(path, FileMode.Create)) 
+            {
+                await addmodel.Copertina.CopyToAsync(stream);
+            }
+            var webPath = Path.Combine("uploads", fileName);
+
+
+                var book = new Libro()
             {
                 Id = Guid.NewGuid(),
                 Titolo = addmodel.Titolo,
                 Autore = addmodel.Autore,
                 IdGenere = addmodel.IdGenere,
                 Disponibilita = addmodel.Disponibilita,
-                Copertina = addmodel.Copertina
+                Copertina = webPath
             };
             _context.Libri.Add(book);
 
@@ -103,8 +112,25 @@ namespace FS0924_BE_S5.Services
 
         }
 
-        public async Task<bool> EditBook(LibroEditViewModel editViewModel)
+        public async Task<bool> EditBook(LibroEditViewModel editViewModel ,string stringaCopertina)
         {
+            string webPath;
+            if(editViewModel.Copertina != null)
+            {
+
+            var fileName = editViewModel.Copertina.FileName;
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", fileName);
+            await using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await editViewModel.Copertina.CopyToAsync(stream);
+            }
+            webPath = Path.Combine("uploads", fileName);
+            }
+            else
+            {
+                webPath = stringaCopertina;
+            }
+
             var libro = await _context.Libri.FindAsync(editViewModel.Id);
             if (libro == null)
             {
@@ -114,7 +140,7 @@ namespace FS0924_BE_S5.Services
             libro.Autore = editViewModel.Autore;
             libro.IdGenere = editViewModel.IdGenere;
             libro.Disponibilita = editViewModel.Disponibilita;
-            libro.Copertina = editViewModel.Copertina;
+            libro.Copertina = webPath;
 
             return await SaveChange();
         }

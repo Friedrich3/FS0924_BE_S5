@@ -69,5 +69,13 @@ namespace FS0924_BE_S5.Services
             }
         }
 
+
+    public async Task<ListaLibriViewModel> GetInCorso()
+        {
+            var Lista = new ListaLibriViewModel();
+            Lista.Libri = await _context.Libri.Include(i => i.Genere).Where(d => d.Disponibilita.Equals(false)).ToListAsync();
+            return Lista;
+        }
+
     }
 }

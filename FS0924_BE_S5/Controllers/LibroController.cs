@@ -70,7 +70,7 @@ namespace FS0924_BE_S5.Controllers
                 Autore = libro.Autore,
                 IdGenere = libro.IdGenere,
                 Disponibilita = libro.Disponibilita,
-                Copertina = libro.Copertina
+                StringaCopertina = libro.Copertina
             };
             //RECUPERA TUTTA LA LISTA
             var Generi = await _libroServices.GetGeneri();
@@ -81,9 +81,9 @@ namespace FS0924_BE_S5.Controllers
             return View(editModel);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(LibroEditViewModel editViewModel)
+        public async Task<IActionResult> Edit(LibroEditViewModel editViewModel, string oldString)
         {
-            var isEdited = await _libroServices.EditBook(editViewModel);
+            var isEdited = await _libroServices.EditBook(editViewModel, oldString);
 
             if (!isEdited)
             {

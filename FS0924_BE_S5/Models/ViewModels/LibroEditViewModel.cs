@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FS0924_BE_S5.Models.ViewModels
 {
@@ -14,6 +15,8 @@ namespace FS0924_BE_S5.Models.ViewModels
         [Required]
         public int IdGenere { get; set; }
         public bool Disponibilita { get; set; }
-        public string? Copertina { get; set; }
+        public IFormFile? Copertina { get; set; }
+
+        public string? StringaCopertina { get; set; }
     }
 }

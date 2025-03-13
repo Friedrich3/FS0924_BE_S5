@@ -11,7 +11,7 @@
 	</div>
 	<hr />
 	<div>
-		<form asp-controller="Libro" asp-action="Edit" method="post">
+		<form asp-controller="Libro" asp-action="Edit" method="post" asp-route-oldstring="@Model.StringaCopertina" enctype="multipart/form-data">
 			<div class="mb-3">
 				<label for="Titolo" class="form-label">Titolo* :</label>
 				<input type="text" class="form-control" asp-for="Titolo" id="Titolo" placeholder="Aggiungi un titolo..." required>
@@ -44,8 +44,9 @@
 			</div>
 			<div class="mb-3">
 				<label for="url" class="form-label">Url Immagine:</label>
-				<input type="text" class="form-control" asp-for="Copertina" id="url" placeholder="Aggiungi una Url per la copertina...">
+				<input type="file" class="form-control" asp-for="Copertina" id="url">
 			</div>
+			
 
 			<small class="text-secondary mb-3">* Indica un campo obbligatorio</small>
 

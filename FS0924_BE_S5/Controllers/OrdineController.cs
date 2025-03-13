@@ -29,5 +29,11 @@ namespace FS0924_BE_S5.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> InCorso()
+        {
+            var Lista = await _ordineServices.GetInCorso();
+            return View(Lista);
+        }
     }
 }

@@ -13,13 +13,11 @@ namespace FS0924_BE_S5.Models
         [Required]
         [StringLength(50)]
         public string? Autore { get; set; }
-        //[Required]
-        //[StringLength(50)]
-        //public string? Genere { get; set; }
         [Required]
         public int IdGenere { get; set; }
 
         public bool Disponibilita { get; set;}
+
         public string? Copertina { get; set; }
 
         [ForeignKey("IdGenere")]

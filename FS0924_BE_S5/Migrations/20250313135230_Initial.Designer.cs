@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FS0924_BE_S5.Migrations
 {
     [DbContext(typeof(PraticaBES5))]
-    [Migration("20250313115809_ChangeDates")]
-    partial class ChangeDates
+    [Migration("20250313135230_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,9 +87,6 @@ namespace FS0924_BE_S5.Migrations
 
                     b.Property<DateTime>("DataScadenza")
                         .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("IdUtente")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("LibroId")
                         .HasColumnType("uniqueidentifier");
